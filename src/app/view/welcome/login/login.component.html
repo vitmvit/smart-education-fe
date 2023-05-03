@@ -1,0 +1,38 @@
+<div class="container-fluid py-5">
+  <br><br>
+  <div class="row justify-content-center">
+    <div class="col-auto align-self-center">
+      <!--&lt;!&ndash;      <div *ngIf="this.errorModel !== undefined">&ndash;&gt;-->
+      <!--&lt;!&ndash;        <div *ngIf="this.errorModel.error !== undefined">&ndash;&gt;-->
+      <!--          <div class="alert alert-danger" role="alert">-->
+      <!--            <p style="margin-bottom: 0">Auth error (status: {{this.errorModel.status}})</p>-->
+      <!--            <hr style="margin: 0"/>-->
+      <!--            <p class="mb-0">-->
+      <!--              {{this.errorModel.error}}<br/>-->
+      <!--              {{this.errorModel.message}}-->
+      <!--            </p>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <br/>
+      <div style="width: 350px;">
+        <div class="d-flex justify-content-between">
+          <h1 class="fw-light" style="margin: 0;">Авторизация</h1>
+        </div>
+        <form class="form-signIn">
+          <input [(ngModel)]="username" class="form-control border-0 card-text shadow-sm bg-light" id="username"
+                 name="username" placeholder="Логин"
+                 required type="email">
+          <input [(ngModel)]="password" class="form-control border-0 card-text shadow-sm bg-light" id="password"
+                 name="password" placeholder="Пароль"
+                 required type="password">
+          <button (click)="signIn()" class="btn btn-primary btn-block btn-dark" type="submit">Вход</button>
+        </form>
+        <div class="d-flex justify-content-between">
+          <a routerLink="/" routerLinkActive="active">Главная страница</a>&nbsp;&nbsp;&nbsp;<a
+          routerLink="/registration" routerLinkActive="active">Регистрация</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
