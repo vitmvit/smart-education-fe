@@ -38,6 +38,12 @@ import {CabinetStatePageComponent} from './view/include/page/cabinet-state-page/
 import {
   CabinetNotificationPageComponent
 } from './view/include/page/cabinet-notification-page/cabinet-notification-page.component';
+import {
+  CabinetAttendancePageComponent
+} from './view/include/page/cabinet-attendance-page/cabinet-attendance-page.component';
+import {
+  CabinetAttendanceStatePageComponent
+} from './view/include/page/cabinet-attendance-state-page/cabinet-attendance-state-page.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +69,9 @@ import {
     // 404
     Page404Component,
     CabinetStatePageComponent,
-    CabinetNotificationPageComponent
+    CabinetNotificationPageComponent,
+    CabinetAttendancePageComponent,
+    CabinetAttendanceStatePageComponent
   ],
   imports: [
     BrowserModule,
