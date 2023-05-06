@@ -7,6 +7,7 @@ export class SessionService {
 
   private check = 'se_check';
   private token = 'se_token';
+  private login = 'se_login';
 
   constructor(private cookieService: CookieService,
               private router: Router) {
@@ -35,10 +36,21 @@ export class SessionService {
     this.setParam(this.token, token);
   }
 
+  getLogin(): string {
+    return this.getParam(this.login);
+  }
+
+  setLogin(login: string): void {
+    this.setParam(this.login, login);
+  }
+
   //---
 
   logOff() {
     this.cookieService.delete(this.token);
+    this.cookieService.delete(this.login);
+    this.cookieService.delete(this.token);
+    this.cookieService.delete(this.login);
     this.router.navigateByUrl('/login');
   }
 

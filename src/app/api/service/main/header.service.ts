@@ -8,30 +8,41 @@ export class HeaderService {
   constructor(private sessionService: SessionService) {
   }
 
-  getHeaderJson(): object {
+  getHeader(): object {
     return {
       headers: new HttpHeaders()
-        .set('Accept', 'application/json')
+        .set('Accept', '*/*')
         .set('Content-type', 'application/json; charset=utf-8')
+        .set('Access-Control-Allow-Origin', '*')
+        .set('Access-Control-Allow-Methods', 'OPTIONS, POST, PUT, GET, DELETE, PATCH')
+        .set('Access-Control-Allow-Headers', "*")
+        .set('Access-Control-Allow-Credentials', 'true')
     };
   }
 
   getHeaderJsonToken(): object {
     return {
       headers: new HttpHeaders()
-        .set('Accept', 'application/json')
-        .set('Content-type', 'application/json; charset=utf-8')
-        // .set('Authorization', 'Bearer ' + this.sessionService.getToken())
-        .set('"x-csrf-token', this.sessionService.getToken())
+        // .set('Accept', '*/*')
+        // .set('Content-type', 'application/json; charset=utf-8')
+        // .set('Access-Control-Allow-Origin', '*')
+        // .set('Access-Control-Allow-Methods', 'OPTIONS, POST, PUT, GET, DELETE, PATCH')
+        // .set('Access-Control-Allow-Headers', "*")
+        // .set('Access-Control-Allow-Credentials', 'true')
+        .set('Authorization', 'Bearer ' + this.sessionService.getToken())
     };
   }
 
   getHeaderToken(): object {
     return {
       headers: new HttpHeaders()
-        .set('Accept', '*/*')
-        // .set('Authorization', 'Bearer ' + this.sessionService.getToken())
-        .set('"x-csrf-token', this.sessionService.getToken())
+        // .set('Accept', '*/*')
+        // .set('Content-type', 'application/json; charset=utf-8')
+        // .set('Access-Control-Allow-Origin', '*')
+        // .set('Access-Control-Allow-Methods', 'OPTIONS, POST, PUT, GET, DELETE, PATCH')
+        // .set('Access-Control-Allow-Headers', "*")
+        // .set('Access-Control-Allow-Credentials', 'true')
+        .set('Authorization', 'Bearer ' + this.sessionService.getToken())
     };
   }
 }

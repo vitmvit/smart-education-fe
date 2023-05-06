@@ -4,15 +4,13 @@ import {Observable} from "rxjs";
 import {ApiService} from '../../main/api.service';
 import {HeaderService} from "./header.service";
 import {UserModel} from "../../model/user.model";
-import {SessionService} from "../../main/session.service";
 
 @Injectable({providedIn: 'root'})
 export class UserService {
 
   constructor(private httpClient: HttpClient,
               private apiService: ApiService,
-              private headerService: HeaderService,
-              private sessionService: SessionService) {
+              private headerService: HeaderService) {
   }
 
   // isExist(login: string): Observable<boolean> {
@@ -20,10 +18,9 @@ export class UserService {
   // }
   //
   me(): Observable<UserModel> {
-    console.log(this.sessionService.getToken());
     return this.httpClient.get<UserModel>(
       this.apiService.getApiUser + '/users/me',
-      this.headerService.getHeaderJsonToken()
+      this.headerService.getHeaderToken()
     );
   }
 

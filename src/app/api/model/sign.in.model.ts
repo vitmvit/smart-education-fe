@@ -1,11 +1,11 @@
 export class SignInModel {
 
-  public login: string;
+  public username: string;
   public password: string;
 
-  constructor(login: string,
+  constructor(username: string,
               password: string) {
-    this.login = login;
+    this.username = username;
     this.password = password;
   }
 }

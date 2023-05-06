@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from '@angular/common/http';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDatepickerModule, NgbModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 // app
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -12,27 +12,7 @@ import {LoginComponent} from './view/welcome/login/login.component';
 import {RegistrationComponent} from './view/welcome/registration/registration.component';
 import {CookiesComponent} from './view/welcome/cookies/cookies.component';
 // cabinet
-import {CabinetMenuComponent} from './view/include/cabinet-menu/cabinet-menu.component';
-import {CabinetMyPageComponent} from './view/include/page-content/cabinet-my-page/cabinet-my-page.component';
-import {CabinetComponent} from './view/auth/cabinet/cabinet.component';
-import {CabinetRootMenuComponent} from './view/include/menu-content/cabinet-root-menu/cabinet-root-menu.component';
-import {CabinetAdminMenuComponent} from './view/include/menu-content/cabinet-admin-menu/cabinet-admin-menu.component';
-// 404
-import {Page404Component} from './view/welcome/page404/page404.component';
-
-import {
-  CabinetSupervisorMenuComponent
-} from './view/include/menu-content/cabinet-supervisor-menu/cabinet-supervisor-menu.component';
-import {
-  CabinetTeacherMenuComponent
-} from './view/include/menu-content/cabinet-teacher-menu/cabinet-teacher-menu.component';
-import {
-  CabinetStudentLeadMenuComponent
-} from './view/include/menu-content/cabinet-student-lead-menu/cabinet-student-lead-menu.component';
-import {
-  CabinetStudentMenuComponent
-} from './view/include/menu-content/cabinet-student-menu/cabinet-student-menu.component';
-import {CabinetGroupPageComponent} from './view/include/page-content/cabinet-group-page/cabinet-group-page.component';
+import {CabinetMenuComponent} from './view/include/menu/cabinet-menu/cabinet-menu.component';
 import {CabinetStatePageComponent} from './view/include/page-content/cabinet-state-page/cabinet-state-page.component';
 import {
   CabinetNotificationPageComponent
@@ -46,7 +26,32 @@ import {
 import {
   CabinetCreateEditPageComponent
 } from './view/include/page-content/cabinet-create-edit-page/cabinet-create-edit-page.component';
-import {CabinetUserMenuComponent} from './view/include/menu-content/cabinet-user-menu/cabinet-user-menu.component';
+import {CabinetMenuStudentComponent} from './view/include/menu/cabinet-menu-student/cabinet-menu-student.component';
+import {CabinetMyProfileComponent} from './view/auth/cabinet/cabinet-my-profile/cabinet-my-profile.component';
+import {CabinetMyGroupComponent} from './view/auth/cabinet/cabinet-my-group/cabinet-my-group.component';
+import {CabinetMyStatisticsComponent} from './view/auth/cabinet/cabinet-my-statistics/cabinet-my-statistics.component';
+import {CabinetMenuRootComponent} from './view/include/menu/cabinet-menu-root/cabinet-menu-root.component';
+import {CabinetMenuAdminComponent} from './view/include/menu/cabinet-menu-admin/cabinet-menu-admin.component';
+import {
+  CabinetMenuSupervisorComponent
+} from './view/include/menu/cabinet-menu-supervisor/cabinet-menu-supervisor.component';
+import {CabinetMenuTeacherComponent} from './view/include/menu/cabinet-menu-teacher/cabinet-menu-teacher.component';
+import {
+  CabinetMenuStudentLeadComponent
+} from './view/include/menu/cabinet-menu-student-lead/cabinet-menu-student-lead.component';
+import {CabinetMenuUserComponent} from './view/include/menu/cabinet-menu-user/cabinet-menu-user.component';
+// 404
+import {Page404Component} from './view/welcome/page404/page404.component';
+import {
+  CabinetGroupAttendanceComponent
+} from './view/auth/cabinet/cabinet-group-attendance/cabinet-group-attendance.component';
+import {
+  CabinetStudentsStatisticsComponent
+} from './view/auth/cabinet/cabinet-students-statistics/cabinet-students-statistics.component';
+import {
+  CabinetMyNotificationComponent
+} from './view/auth/cabinet/cabinet-my-notification/cabinet-my-notification.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -59,30 +64,36 @@ import {CabinetUserMenuComponent} from './view/include/menu-content/cabinet-user
     CookiesComponent,
     // cabinet
     CabinetMenuComponent,
-    CabinetMyPageComponent,
-    CabinetComponent,
-    CabinetRootMenuComponent,
-    CabinetAdminMenuComponent,
-    CabinetSupervisorMenuComponent,
-    CabinetTeacherMenuComponent,
-    CabinetStudentLeadMenuComponent,
-    CabinetStudentMenuComponent,
-    CabinetGroupPageComponent,
-    CabinetUserMenuComponent,
-    // 404
-    Page404Component,
     CabinetStatePageComponent,
     CabinetNotificationPageComponent,
     CabinetAttendancePageComponent,
     CabinetAttendanceStatePageComponent,
-    CabinetCreateEditPageComponent
+    CabinetCreateEditPageComponent,
+    CabinetMenuStudentComponent,
+    CabinetMyProfileComponent,
+    CabinetMyGroupComponent,
+    CabinetMyStatisticsComponent,
+    CabinetMenuRootComponent,
+    CabinetMenuAdminComponent,
+    CabinetMenuSupervisorComponent,
+    CabinetMenuTeacherComponent,
+    CabinetMenuStudentLeadComponent,
+    CabinetMenuUserComponent,
+    // 404
+    Page404Component,
+    CabinetGroupAttendanceComponent,
+    CabinetStudentsStatisticsComponent,
+    CabinetMyNotificationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     HttpClientModule,
-    FormsModule
+    RouterModule,
+    FormsModule,
+    NgbModule,
+    NgbDatepickerModule,
+    NgbPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

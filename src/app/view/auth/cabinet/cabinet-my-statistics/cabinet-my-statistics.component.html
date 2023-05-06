@@ -1,0 +1,71 @@
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js' type='text/javascript'></script>
+<link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
+<div class="body" id="body-pd">
+  <header class="header bg-light" id="header">
+    <div class="header_toggle text-dark" onClick="toggleMenu()">
+      <i class='bx bx-menu' id="header-toggle"></i>
+    </div>
+    <div class="header_img">
+      <img alt="" src="../src/assets/main/img/logo/person-circle.svg">
+    </div>
+  </header>
+  <div class="l-navbar bg-dark" id="navbar">
+    <app-cabinet-menu
+      [itemName]=this.myStatistics
+      [role]=this.role
+    ></app-cabinet-menu>
+  </div>
+  <div class="height-100 bg-white">
+    <!-- start content -->
+    <h1>Моя статистика посещений</h1>
+    <hr>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Предмет</th>
+        <th scope="col">Кол-во часов</th>
+        <th scope="col">Пропущено</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td class="navbar-brand d-flex align-items-center" href="#">
+          <strong>&nbsp;Предмет 1</strong>
+        </td>
+        <td>100</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td class="navbar-brand d-flex align-items-center" href="#">
+          <strong>&nbsp;Предмет 2</strong>
+        </td>
+        <td>293</td>
+        <td>293</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td class="navbar-brand d-flex align-items-center" href="#">
+          <strong>&nbsp;Предмет 3</strong>
+        </td>
+        <td>657</td>
+        <td>657</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td class="navbar-brand d-flex align-items-center" href="#">
+          <strong>&nbsp;Предмет 4</strong>
+        </td>
+        <td>657</td>
+        <td>657</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <!-- end content -->
+  </div>
+</div>
+<script src="../src/assets/main/scripts/cabinet-template.component.js" type="text/javascript"></script>
+
