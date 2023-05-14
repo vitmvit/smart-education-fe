@@ -52,6 +52,7 @@ import {
   CabinetMyNotificationComponent
 } from './view/auth/cabinet/cabinet-my-notification/cabinet-my-notification.component';
 import {RouterModule} from "@angular/router";
+import {ImageViewComponent} from './view/include/image-view/image-view.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import {RouterModule} from "@angular/router";
     Page404Component,
     CabinetGroupAttendanceComponent,
     CabinetStudentsStatisticsComponent,
-    CabinetMyNotificationComponent
+    CabinetMyNotificationComponent,
+    ImageViewComponent
   ],
   imports: [
     BrowserModule,

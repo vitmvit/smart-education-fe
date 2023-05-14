@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Injectable} from "@angular/core";
 import {environment} from "../../../environments/environment";
 
-@Injectable({providedIn: 'root'})
+@Injectable({providedIn: "root"})
 export class ApiService {
 
   constructor() {
@@ -9,6 +9,10 @@ export class ApiService {
 
   get getApiRoot(): string {
     return environment.apiRootUrl;
+  }
+
+  get getApiAdmin(): string {
+    return environment.apiAdminUrl;
   }
 
   get getApiAuth(): string {

@@ -1,17 +1,15 @@
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js' type='text/javascript'></script>
-<link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
 <div class="body" id="body-pd">
   <header class="header bg-light" id="header">
     <div class="header_toggle text-dark" onClick="toggleMenu()">
       <i class='bx bx-menu' id="header-toggle"></i>
     </div>
     <div class="header_img">
-      <img alt="" src="../src/assets/main/img/logo/person-circle.svg">
+<!--      <img alt="" src="../src/assets/main/img/logo/person-circle.svg">-->
     </div>
   </header>
   <div class="l-navbar bg-dark" id="navbar">
     <app-cabinet-menu
-      [itemName]=this.myGroup
+      [itemName]=this.itemName
       [role]=this.role
     ></app-cabinet-menu>
   </div>
@@ -203,5 +201,4 @@
     <!-- end content -->
   </div>
 </div>
-<script src="../src/assets/main/scripts/cabinet-template.component.js" type="text/javascript"></script>
 

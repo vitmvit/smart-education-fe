@@ -2,11 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
 import {SessionService} from "../../../api/main/session.service";
-import {SignService} from "../../../api/service/main/sign.service";
-import {UserService} from "../../../api/service/main/user.service";
+import {SignService} from "../../../api/main/sign.service";
+import {UserService} from "../../../api/service/user.service";
 import {SignInModel} from "../../../api/model/sign.in.model";
-import {ErrorModel} from "../../../api/service/main/error.model";
-import {TokenModel} from "../../../api/model/token.model";
+import {ErrorModel} from "../../../api/main/error.model";
 
 @Component({
   selector: 'app-login',
@@ -15,14 +14,9 @@ import {TokenModel} from "../../../api/model/token.model";
 })
 export class LoginComponent implements OnInit {
 
-  // @ts-ignore
-  username: string;
-  // @ts-ignore
-  password: string;
-  // @ts-ignore
-  errorModel: ErrorModel;
-  // @ts-ignore
-  tokenModel: TokenModel;
+  username!: string;
+  password!: string;
+  errorModel!: ErrorModel;
 
   constructor(private signService: SignService,
               private sessionService: SessionService,
@@ -30,6 +24,7 @@ export class LoginComponent implements OnInit {
               private cookieService: CookieService,
               private router: Router) {
     this.sessionService.checkCookies();
+    this.sessionService.checkLogin();
   }
 
   ngOnInit(): void {
@@ -50,7 +45,6 @@ export class LoginComponent implements OnInit {
             },
             error: (fault2) => {
               this.errorModel = new ErrorModel(fault2.error.error, [], fault2.error.error_description, fault2.status);
-              //this.sessionService.logOff();
             }
           });
         }

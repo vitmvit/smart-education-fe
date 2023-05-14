@@ -1,16 +1,23 @@
-import {Injectable} from '@angular/core';
-import {CookieService} from 'ngx-cookie-service';
-import {Router} from '@angular/router';
+import {Injectable} from "@angular/core";
+import {CookieService} from "ngx-cookie-service";
+import {Router} from "@angular/router";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ApiService} from "./api.service";
+import {HeaderService} from "./header.service";
+import {Observable} from "rxjs";
 
-@Injectable({providedIn: 'root'})
+@Injectable({providedIn: "root"})
 export class SessionService {
 
-  private check = 'se_check';
-  private token = 'se_token';
-  private login = 'se_login';
+  private check = "se_check";
+  private token = "se_token";
+  private login = "se_login";
 
   constructor(private cookieService: CookieService,
-              private router: Router) {
+              private router: Router,
+              private httpClient: HttpClient,
+              private apiService: ApiService,
+              private headerService: HeaderService) {
   }
 
   /**
@@ -22,7 +29,26 @@ export class SessionService {
     if (this.cookieService.check(this.check)) {
       this.cookieService.delete(this.check);
     } else {
-      this.router.navigateByUrl('/cookie');
+      this.router.navigateByUrl("/cookie");
+    }
+  }
+
+  checkLogin() {
+    if (!this.cookieService.check(this.login) || !this.cookieService.check(this.token)) {
+      this.logOff();
+    }
+  }
+
+  checkSession() {
+    if (!this.cookieService.check(this.login) || !this.cookieService.check(this.token)) {
+      this.logOff();
+    }
+    if (this.cookieService.check(this.login) && this.cookieService.check(this.token)) {
+      this.checkCurrentLogin(this.cookieService.get(this.login)).subscribe(response => {
+        if (!response) {
+          this.logOff();
+        }
+      });
     }
   }
 
@@ -49,9 +75,7 @@ export class SessionService {
   logOff() {
     this.cookieService.delete(this.token);
     this.cookieService.delete(this.login);
-    this.cookieService.delete(this.token);
-    this.cookieService.delete(this.login);
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl("/login");
   }
 
   //---
@@ -61,14 +85,47 @@ export class SessionService {
     if (this.cookieService.check(key)) {
       return this.cookieService.get(key);
     } else {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl("/login");
     }
   }
 
   setParam(key: string, value: string): void {
     this.cookieService.set(key, value);
     if (!this.cookieService.check(key)) {
-      this.router.navigateByUrl('/cookie');
+      this.router.navigateByUrl("/cookie");
     }
+  }
+
+  checkCurrentLogin(login: string): Observable<boolean> {
+    // @ts-ignore
+    return this.httpClient.get<boolean>(
+      this.apiService.getApiUser + "/users/current?login=" + login,
+      this.getHeaderToken()
+    );
+  }
+
+  getHeader(): object {
+    return {
+      headers: new HttpHeaders()
+        .set("Accept", "*/*")
+        .set("Content-type", "application/json; charset=utf-8")
+        .set("Access-Control-Allow-Origin", "*")
+        .set("Access-Control-Allow-Methods", "OPTIONS, POST, PUT, GET, DELETE, PATCH")
+        .set("Access-Control-Allow-Headers", "*")
+        .set("Access-Control-Allow-Credentials", "true")
+    };
+  }
+
+  getHeaderToken(): object {
+    return {
+      headers: new HttpHeaders()
+        // .set("Accept", "*/*")
+        // .set("Content-type", "application/json; charset=utf-8")
+        // .set("Access-Control-Allow-Origin", "*")
+        // .set("Access-Control-Allow-Methods", "OPTIONS, POST, PUT, GET, DELETE, PATCH")
+        // .set("Access-Control-Allow-Headers", "*")
+        // .set("Access-Control-Allow-Credentials", "true")
+        .set("Authorization", "Bearer " + this.getToken())
+    };
   }
 }

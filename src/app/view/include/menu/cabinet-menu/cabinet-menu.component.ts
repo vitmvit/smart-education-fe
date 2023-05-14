@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {RoleModel} from "../../../../api/model/role.model";
 
 @Component({
   selector: 'app-cabinet-menu',
@@ -7,7 +8,7 @@ import {Component, Input} from '@angular/core';
 })
 export class CabinetMenuComponent {
 
-  @Input() role = "ROLE_TEACHER";
+  @Input() role!: RoleModel;
   @Input() itemName = "my-profile";
 
   constructor() {

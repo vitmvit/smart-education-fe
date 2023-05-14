@@ -4,6 +4,7 @@ export const environment = {
   production: false,
   enableDebug: true,
   apiRootUrl: 'http://' + ipAddress + ':' + port + '/api/root',
+  apiAdminUrl: 'http://' + ipAddress + ':' + port + '/api/admin',
   apiAuthUrl: 'http://' + ipAddress + ':' + port + '/api/auth',
   apiUserUrl: 'http://' + ipAddress + ':' + port + '/api/user',
   apiOpenUrl: 'http://' + ipAddress + ':' + port + '/api/open'

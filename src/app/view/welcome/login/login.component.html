@@ -2,18 +2,18 @@
   <br><br>
   <div class="row justify-content-center">
     <div class="col-auto align-self-center">
-      <!--&lt;!&ndash;      <div *ngIf="this.errorModel !== undefined">&ndash;&gt;-->
-      <!--&lt;!&ndash;        <div *ngIf="this.errorModel.error !== undefined">&ndash;&gt;-->
-      <!--          <div class="alert alert-danger" role="alert">-->
-      <!--            <p style="margin-bottom: 0">Auth error (status: {{this.errorModel.status}})</p>-->
-      <!--            <hr style="margin: 0"/>-->
-      <!--            <p class="mb-0">-->
-      <!--              {{this.errorModel.error}}<br/>-->
-      <!--              {{this.errorModel.message}}-->
-      <!--            </p>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
+      <div *ngIf="this.errorModel !== undefined">
+        <div *ngIf="this.errorModel.error !== undefined">
+          <div class="alert alert-danger" role="alert">
+            <p style="margin-bottom: 0">Auth error (status: {{this.errorModel.status}})</p>
+            <hr style="margin: 0"/>
+            <p class="mb-0">
+              {{this.errorModel.error}}<br/>
+              {{this.errorModel.message}}
+            </p>
+          </div>
+        </div>
+      </div>
       <br/>
       <div style="width: 350px;">
         <div class="d-flex justify-content-between">

@@ -1,175 +1,104 @@
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js' type='text/javascript'></script>
-<link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
 <div class="body" id="body-pd">
   <header class="header bg-light" id="header">
     <div class="header_toggle text-dark" onClick="toggleMenu()">
       <i class='bx bx-menu' id="header-toggle"></i>
     </div>
     <div class="header_img">
-      <img alt="" src="../src/assets/main/img/logo/person-circle.svg">
+      <!--      <img alt="" src="../src/assets/main/img/logo/person-circle.svg">-->
     </div>
   </header>
   <div class="l-navbar bg-dark" id="navbar">
     <app-cabinet-menu
-      [itemName]=this.groupAttendance
+      [itemName]=this.itemName
       [role]=this.role
     ></app-cabinet-menu>
   </div>
   <div class="height-100 bg-white">
     <!-- start content -->
-    <h1>Отметка посещения</h1>
+    <h1>Отметка посещения / {{this.group.name + this.group.number}}</h1>
+    Поступление: {{this.group.admissionDate}}, выпуск: {{this.group.graduationDate}}
     <hr>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <div class="dropdown my-2">
-        <button aria-expanded="false" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                id="dropdownMenuButton1"
-                type="button">
-          Препод
-        </button>
-        <ul aria-labelledby="dropdownMenuButton1" class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">препод 1</a></li>
-          <li><a class="dropdown-item" href="#">препод 2</a></li>
-          <li><a class="dropdown-item" href="#">препод 3</a></li>
-        </ul>
+
+    <div class="row">
+      <div class="col">
+        <div class="input-group">
+          <input #c2="ngModel" #d2="ngbDatepicker" [(ngModel)]="calendar" class="form-control" name="d2" ngbDatepicker
+                 placeholder="yyyy-MM-dd"/>
+          <button (click)="d2.toggle()" class="btn btn-outline-secondary bi bi-calendar3" type="button"></button>
+        </div>
       </div>
-      <div class="dropdown my-2">
-        <button aria-expanded="false" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
-                id="dropdownMenuButton"
-                type="button">
-          Пара
-        </button>
-        <ul aria-labelledby="dropdownMenuButton1" class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">пара 1</a></li>
-          <li><a class="dropdown-item" href="#">пара 2</a></li>
-          <li><a class="dropdown-item" href="#">пара 3</a></li>
-          <li><a class="dropdown-item" href="#">пара 4</a></li>
-          <li><a class="dropdown-item" href="#">пара 5</a></li>
-          <li><a class="dropdown-item" href="#">пара 6</a></li>
-        </ul>
+      <div class="col">
+        <select (change)="this.selectSubject()" [(ngModel)]="subjectId" aria-label="" class="form-select">
+          <option *ngFor="let subjectItem of this.subjectArray" [value]=subjectItem.id>{{subjectItem.name}}</option>
+        </select>
       </div>
+      <div class="col">
+        <select (change)="this.selectTeacher()" [(ngModel)]="teacherId" aria-label="" class="form-select">
+          <option *ngFor="let teacherItem of this.teacherArray"
+                  [value]=teacherItem.id>{{teacherItem.lastName + " " + teacherItem.name}}</option>
+        </select>
+      </div>
+      <div class="col">
+        <select (change)="this.selectLesson()" [(ngModel)]="lessonNumber" aria-label="" class="form-select">
+          <option selected>Пара</option>
+          <option [value]="1">1</option>
+          <option [value]="2">2</option>
+          <option [value]="3">3</option>
+          <option [value]="4">4</option>
+          <option [value]="5">5</option>
+          <option [value]="6">6</option>
+          <option [value]="7">7</option>
+          <option [value]="8">8</option>
+        </select>
+      </div>
+      <div class="col"></div>
+      <div class="col"></div>
     </div>
-    <table class="table">
+
+    <hr/>
+
+    <table class="table table-hover">
       <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Студент</th>
-        <th scope="col">Присутствие</th>
-        <th scope="col">Причина неявки</th>
+        <th class="w-auto">#</th>
+        <th class="w-auto">ФИО</th>
+        <th class="w-auto">
+          <input (click)="selectAll()" [(ngModel)]="selectedAll" class="form-check-input" id="selectAll" type="checkbox"
+                 value=""> Присутствие
+        </th>
+        <th class="w-auto">Причины</th>
+        <th>Описание</th>
       </tr>
       </thead>
       <tbody>
+      <tr *ngFor="let studentItem of this.userArray">
+        <td>
+          <app-image-view [imageHeight]=100 [imageUuid]="studentItem.avatarUuid" [imageWidth]=100></app-image-view>
+        </td>
+        <td>
+          {{studentItem.lastName}}&nbsp;{{studentItem.name}}&nbsp;{{studentItem.middleName}}
+        </td>
+        <td>
+          <input (click)="checkSelectAll(studentItem.id)" class="form-check-input" id="visit_{{studentItem.id}}"
+                 type="checkbox">
+        </td>
+        <td>
+          <select class="form-select" id="reason_{{studentItem.id}}">
+            <option selected value="1">По семейным обстоятельствам</option>
+            <option value="2">По болезни</option>
+            <option value="3">Неизвестно</option>
+          </select>
+        </td>
+        <td>
+          <input class="form-control" id="description_{{studentItem.id}}" type="email">
+        </td>
       <tr>
-        <th scope="row">1</th>
-        <td class="navbar-brand d-flex align-items-center" href="#">
-          <img alt="" src="../../../../../assets/main/img/logo/person-circle.svg">
-          <strong class="my-1">&nbsp;Студент 1</strong>
-          <p></p>
-        </td>
-        <td>
-          <div class="form-check">
-            <input class="form-check-input" id="flexCheckDefault2" type="checkbox" value="">
-          </div>
-        </td>
-        <td>
-          <div class="dropdown">
-            <button aria-expanded="false" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-                    type="button">
-              Small button
-            </button>
-
-            <ul aria-labelledby="dropdownMenuLink" class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td class="navbar-brand d-flex align-items-center" href="#">
-          <img alt="" src="../../../../../assets/main/img/logo/person-circle.svg">
-          <strong class="my-1">&nbsp;Студент 2</strong>
-        </td>
-        <td>
-          <div class="form-check">
-            <input class="form-check-input" id="flexCheckDefault4" type="checkbox" value="">
-          </div>
-        </td>
-        <td>
-          <div class="dropdown">
-            <button aria-expanded="false" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-                    type="button">
-              Small button
-            </button>
-
-            <ul aria-labelledby="dropdownMenuLink" class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td class="navbar-brand d-flex align-items-center" href="#">
-
-          <img alt="" src="../../../../../assets/main/img/logo/person-circle.svg">
-          <strong class="my-1">&nbsp;Студент 3</strong>
-        </td>
-        <td>
-          <div class="form-check">
-            <input class="form-check-input" id="flexCheckDefault3" type="checkbox" value="">
-          </div>
-        </td>
-        <td>
-          <div class="dropdown">
-            <button aria-expanded="false" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-                    type="button">
-              Small button
-            </button>
-
-            <ul aria-labelledby="dropdownMenuLink" class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">4</th>
-        <td class="navbar-brand d-flex align-items-center" href="#">
-          <img alt="" src="../../../../../assets/main/img/logo/person-circle.svg">
-          <strong class="my-1">&nbsp;Студент 4</strong>
-        </td>
-        <td>
-          <div class="form-check">
-            <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="">
-          </div>
-        </td>
-        <td>
-          <div class="dropdown">
-            <button aria-expanded="false" class="btn btn-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown"
-                    type="button">
-              Small button
-            </button>
-
-            <ul aria-labelledby="dropdownMenuLink" class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
       </tbody>
     </table>
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn btn-secondary me-md-2" type="button">Подтвердить</button>
-    </div>
-    <!-- end content -->
+    <button (click)="this.submitVisit()" class="btn btn-primary" type="button">Подтвердить</button>
+
+    <br/>
+    <br/>
+    <!-- start content -->
   </div>
 </div>
-<script src="../src/assets/main/scripts/cabinet-template.component.js" type="text/javascript"></script>

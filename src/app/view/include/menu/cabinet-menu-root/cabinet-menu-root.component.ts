@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SessionService} from "../../../../api/main/session.service";
 
 @Component({
@@ -6,11 +6,14 @@ import {SessionService} from "../../../../api/main/session.service";
   templateUrl: './cabinet-menu-root.component.html',
   styleUrls: ['./cabinet-menu-root.component.css']
 })
-export class CabinetMenuRootComponent {
+export class CabinetMenuRootComponent implements OnInit {
 
-  @Input() itemName = "my-profile";
+  @Input() itemName!: string;
 
   constructor(private sessionService: SessionService) {
+  }
+
+  ngOnInit(): void {
   }
 
   logOff() {

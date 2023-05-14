@@ -1,17 +1,15 @@
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js' type='text/javascript'></script>
-<link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'>
 <div class="body" id="body-pd">
   <header class="header bg-light" id="header">
     <div class="header_toggle text-dark" onClick="toggleMenu()">
-      <i class='bx bx-menu' id="header-toggle"></i>
+      <i class="bx bx-menu" id="header-toggle"></i>
     </div>
     <div class="header_img">
-      <img alt="" src="../src/assets/main/img/logo/person-circle.svg">
+      <!--<img alt="" src="../src/assets/main/img/logo/person-circle.svg">-->
     </div>
   </header>
   <div class="l-navbar bg-dark" id="navbar">
     <app-cabinet-menu
-      [itemName]=this.myProfile
+      [itemName]=this.itemName
       [role]=this.role
     ></app-cabinet-menu>
   </div>
@@ -22,38 +20,44 @@
     <br/>
     <div class="row">
       <div class="col flex-grow-0">
-        <img alt="" class="img-thumbnail" src="../../../../../assets/main/img/logo/no_avatar.png"
-             style="max-height: 250px; max-width: 250px;">
+        <app-image-view
+          [imageHeight]=250
+          [imageUuid]="this.user.avatarUuid"
+          [imageWidth]=250
+        ></app-image-view>
+        <!--        <img alt="" class="img-thumbnail" src="../../../../../assets/img/logo/no_avatar.png" style="max-height: 250px; max-width: 250px;">-->
       </div>
       <div class="col flex-shrink-0">
         <div class="mb-3 row">
           <label class="col-sm-2 col-form-label text-break" for="login">Login (email)</label>
           <div class="col-sm-10">
-            <input class="form-control-plaintext" id="login" readonly type="text" value="galimyi_lamer@myla.net">
+            <input class="form-control-plaintext" id="login" readonly type="text" value="{{user && user.login}}">
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-2 col-form-label text-break" for="partBilet">Студенческий</label>
           <div class="col-sm-10">
-            <input class="form-control-plaintext" id="partBilet" readonly type="text" value="1234567">
+            <input class="form-control-plaintext" id="partBilet" readonly type="text"
+                   value="{{user && user.studentNumber}}">
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-2 col-form-label text-break" for="lastName">Фамилия</label>
           <div class="col-sm-10">
-            <input class="form-control-plaintext" id="lastName" readonly type="text" value="Фамилия">
+            <input class="form-control-plaintext" id="lastName" readonly type="text" value="{{user && user.lastName}}">
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-2 col-form-label text-break" for="name">Имя</label>
           <div class="col-sm-10">
-            <input class="form-control-plaintext" id="name" readonly type="text" value="Имя">
+            <input class="form-control-plaintext" id="name" readonly type="text" value="{{user && user.name}}">
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-2 col-form-label text-break" for="middleName">Отчество</label>
           <div class="col-sm-10">
-            <input class="form-control-plaintext" id="middleName" readonly type="text" value="Отчество">
+            <input class="form-control-plaintext" id="middleName" readonly type="text"
+                   value="{{user && user.middleName}}">
           </div>
         </div>
         <div class="mb-3 row">
@@ -67,5 +71,4 @@
     <!-- end content -->
   </div>
 </div>
-<script src="../src/assets/main/scripts/cabinet-template.component.js" type="text/javascript"></script>
 

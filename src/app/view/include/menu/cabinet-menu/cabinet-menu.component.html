@@ -11,25 +11,26 @@
       <strong>&nbsp;SmartEducation</strong>
     </a>
     <div class="nav_list">
-      <div *ngIf="this.role == 'ROLE_ROOT'">
+      <div *ngIf="this.role?.name == 'ROLE_ROOT'">
+        jhgsdjhgasjdgh
         <app-cabinet-menu-root [itemName]="this.itemName"></app-cabinet-menu-root>
       </div>
-      <div *ngIf="this.role == 'ROLE_ADMIN'">
+      <div *ngIf="this.role?.name == 'ROLE_ADMIN'">
         <app-cabinet-menu-admin [itemName]="this.itemName"></app-cabinet-menu-admin>
       </div>
-      <div *ngIf="this.role == 'ROLE_SUPERVISOR'">
+      <div *ngIf="this.role?.name == 'ROLE_SUPERVISOR'">
         <app-cabinet-menu-supervisor [itemName]="this.itemName"></app-cabinet-menu-supervisor>
       </div>
-      <div *ngIf="this.role == 'ROLE_TEACHER'">
+      <div *ngIf="this.role?.name == 'ROLE_TEACHER'">
         <app-cabinet-menu-teacher [itemName]="this.itemName"></app-cabinet-menu-teacher>
       </div>
-      <div *ngIf="this.role == 'ROLE_STUDENT_LEAD'">
+      <div *ngIf="this.role?.name == 'ROLE_STUDENT_LEAD'">
         <app-cabinet-menu-student-lead [itemName]="this.itemName"></app-cabinet-menu-student-lead>
       </div>
-      <div *ngIf="this.role == 'ROLE_STUDENT'">
+      <div *ngIf="this.role?.name == 'ROLE_STUDENT'">
         <app-cabinet-menu-student [itemName]="this.itemName"></app-cabinet-menu-student>
       </div>
-      <div *ngIf="this.role == 'ROLE_USER'">
+      <div *ngIf="this.role?.name == 'ROLE_USER'">
         <app-cabinet-menu-user [itemName]="this.itemName"></app-cabinet-menu-user>
       </div>
     </div>
